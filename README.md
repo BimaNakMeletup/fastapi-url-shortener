@@ -1,25 +1,41 @@
 # URL Shortener API (Bit.ly Clone)
 
-Aplikasi pemendek URL sederhana menggunakan **FastAPI** untuk backend, **MySQL** untuk penyimpanan data, dan **Vanilla JS + Tailwind CSS** untuk antarmuka *single-page application* (SPA). Proyek ini dibuat modular dan sudah dilengkapi dengan sistem autentikasi JWT.
+A lightweight and fast URL Shortener built with FastAPI, MySQL, and JWT Authentication. Features a clean, single-page application (SPA) dashboard styled with Tailwind CSS.
 
-## 🚀 Fitur Utama
-* **Shorten URL:** Ubah URL panjang menjadi kode unik 6 karakter.
-* **Custom Alias:** Bisa buat custom string sendiri untuk ujung link (misal: `/portofolio`).
-* **JWT Authentication:** Fitur register & login untuk mengamankan link yang digenerate.
-* **Dashboard Analitik:** Melihat daftar link yang sudah dibuat beserta total hitungan klik (`clicks counter`) secara real-time.
-* **Expiration Link:** Pengaturan masa aktif link (opsional).
+## Features
 
-## 📁 Struktur Folder
+- **Link Generation:** Convert long URLs into dynamic short links (auto-generated 6-character codes).
+- **Custom Aliases:** Allow registered users to define their own custom short codes (e.g., `/my-portfolio`).
+- **Click Analytics:** Real-time counter tracks the total number of visits per link.
+- **JWT Authentication:** Secure User Register & Login system to manage personal links in a private dashboard.
+- **Public Redirection:** Fast routing and HTTP 307 temporary redirection for visitors without requiring authentication.
+
+---
+
+## Tech Stack
+
+- **Backend:** Python 3.13+, FastAPI, Uvicorn
+- **Database ORM:** SQLAlchemy, PyMySQL
+- **Security:** Passlib (Bcrypt for password hashing), Python-Jose (JWT Tokens)
+- **Frontend:** Vanilla JavaScript, HTML5, Tailwind CSS via CDN
+
+---
+
+## Project Structure
+
 ```text
 url-shortener/
 ├── app/
-│   ├── main.py          # Entry point aplikasi & mounting frontend
-│   ├── config.py        # Validasi environment (.env)
-│   ├── database.py      # Koneksi SQLAlchemy & Dependency DB
-│   ├── models/          # Skema tabel MySQL (User & Url)
-│   ├── schemas/         # Validasi data masuk/keluar (Pydantic)
-│   ├── routers/         # Endpoint API / Controller (Auth & Url)
-│   └── utils/           # Helper fungsi acak & keamanan JWT
-└── frontend/
-    └── index.html       # Tampilan Landing Page & Dashboard SPA
-
+│   ├── config.py          # Environment configuration mapping
+│   ├── database.py        # SQLAlchemy connection and engine setup
+│   ├── main.py            # Entrypoint & FastAPI initialization
+│   ├── models/            # Database schema definitions (MySQL)
+│   ├── routers/           # Combined API Routes and Controllers
+│   │   ├── auth.py        # Login, Register, & JWT Logic
+│   │   └── url.py         # Shorten, Redirect, & Dashboard Logic
+│   └── utils/             # Hashing, JWT creation, and code generators
+├── frontend/
+│   └── index.html         # SPA Dashboard UI
+├── .env                   # Local configuration (Ignored in git)
+├── .gitignore             # Git ignore file configuration
+└── requirements.txt       # Python package dependencies
